@@ -45,7 +45,14 @@ public class AutenticacaoFacede extends AbstractFacade<Autenticacao> {
 		return resultado;
 	}
 
-	public Autenticacao buscarPorNomeAutenticacao(String nome) {
-		return null;
+	public Autenticacao buscarAutenticacao(String nome, String senha) {
+
+		System.out.println("buscando autenticacao" + nome + " senha: " + senha);
+		TypedQuery<Autenticacao> query = em.createQuery(
+				"SELECT a FROM Autenticacao a WHERE a.nomeAutenticacao = ?1 and a.senhaAutenticacao =?2",
+				Autenticacao.class);
+		query.setParameter(1, nome);
+		query.setParameter(2, senha);
+		return query.getSingleResult();
 	}
 }

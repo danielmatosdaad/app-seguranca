@@ -29,7 +29,7 @@
     </dependency>
     <dependency>
     	<groupId>br.com.app.smart.business</groupId>
-    	<artifactId>app-controle-sessao-integracao</artifactId>
+    	<artifactId>app-barramento-controle-sessao-integracao</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>

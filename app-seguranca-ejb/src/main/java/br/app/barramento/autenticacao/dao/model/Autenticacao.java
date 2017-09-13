@@ -2,19 +2,19 @@ package br.app.barramento.autenticacao.dao.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import br.app.barramento.integracao.dao.interfaces.Entidade;
 
-
 @Entity
 @XmlRootElement
-@Table(name = "autenticacao")
 public class Autenticacao implements Entidade, Serializable {
 
 	/**
@@ -25,10 +25,16 @@ public class Autenticacao implements Entidade, Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotNull
+	@Column(unique = true)
+	@Size(min = 1, max = 20, message = "Tamanho maximo de caracteres sao 20")
 	private String nomeAutenticacao;
-	private String senha;
-	private String codigoQrCode;
+	@NotNull
+	@Size(min = 1, max = 100, message = "Tamanho maximo de caracteres sao 100")
+	private String senhaAutenticacao;
+	@NotNull
 	private boolean ativo;
+	@NotNull
 	private boolean liberado;
 
 	@Override
@@ -50,20 +56,12 @@ public class Autenticacao implements Entidade, Serializable {
 		this.nomeAutenticacao = nomeAutenticacao;
 	}
 
-	public String getSenha() {
-		return senha;
+	public String getSenhaAutenticacao() {
+		return senhaAutenticacao;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
-	public String getCodigoQrCode() {
-		return codigoQrCode;
-	}
-
-	public void setCodigoQrCode(String codigoQrCode) {
-		this.codigoQrCode = codigoQrCode;
+	public void setSenhaAutenticacao(String senhaAutenticacao) {
+		this.senhaAutenticacao = senhaAutenticacao;
 	}
 
 	public boolean isAtivo() {

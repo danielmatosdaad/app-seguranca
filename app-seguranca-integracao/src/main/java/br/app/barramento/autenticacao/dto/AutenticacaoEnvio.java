@@ -13,7 +13,8 @@ public class AutenticacaoEnvio implements Serializable {
 	private Long idetificadorAutenticacao;
 	private String nomeIdentificadorAutenticacao;
 	private String senha;
-	private String ipporta;
+	private String ip;
+	private String porta;
 	private String identificadorDispotivo;
 	private String brownser;
 	private Date datahora;
@@ -21,14 +22,16 @@ public class AutenticacaoEnvio implements Serializable {
 
 	public AutenticacaoEnvio() {
 	}
+
 	public AutenticacaoEnvio(Long idetificadorAutenticacao, String nomeIdentificadorAutenticacao, String senha,
-			String ipporta, String identificadorDispotivo, String brownser, Date datahora,
+			String ip, String porta, String identificadorDispotivo, String brownser, Date datahora,
 			TipoAutenticacao tipoAutenticacao) {
 
 		this.idetificadorAutenticacao = idetificadorAutenticacao;
 		this.nomeIdentificadorAutenticacao = nomeIdentificadorAutenticacao;
 		this.senha = senha;
-		this.ipporta = ipporta;
+		this.ip = ip;
+		this.porta = porta;
 		this.identificadorDispotivo = identificadorDispotivo;
 		this.brownser = brownser;
 		this.datahora = datahora;
@@ -59,12 +62,20 @@ public class AutenticacaoEnvio implements Serializable {
 		this.nomeIdentificadorAutenticacao = nomeIdentificadorAutenticacao;
 	}
 
-	public String getIpporta() {
-		return ipporta;
+	public String getIp() {
+		return ip;
 	}
 
-	public void setIpporta(String ipporta) {
-		this.ipporta = ipporta;
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public String getPorta() {
+		return porta;
+	}
+
+	public void setPorta(String porta) {
+		this.porta = porta;
 	}
 
 	public String getIdentificadorDispotivo() {

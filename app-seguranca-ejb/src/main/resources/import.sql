@@ -30,3 +30,8 @@ insert into autorizacaoservico(idRepositorio, idCatalago, idServico,idPerfil) va
 insert into autorizacaoservico(idRepositorio, idCatalago, idServico,idPerfil) values ('2', '11', '1','1')
 insert into autorizacaoservico(idRepositorio, idCatalago, idServico,idPerfil) values ('2', '12', '1','1')
 insert into autorizacaoservico(idRepositorio, idCatalago, idServico,idPerfil) values ('2', '13', '1','1')
+
+
+insert into autenticacao(nomeAutenticacao,senhaAutenticacao,ativo,liberado) values ('daniel.matos', 'adm',1,1) 
+insert into autenticacao(nomeAutenticacao,senhaAutenticacao,ativo,liberado) values ('aplicativo.imob', 'imob',1,1) 
+

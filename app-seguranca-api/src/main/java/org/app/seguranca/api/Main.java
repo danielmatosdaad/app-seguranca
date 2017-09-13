@@ -15,7 +15,8 @@ public class Main {
 		envio.setNomeIdentificadorAutenticacao("daniel.matos");
 		envio.setSenha("123456");
 		envio.setBrownser("safari");
-		envio.setIpporta("127.0.0.1:8080");
+		envio.setIp("127.0.0.1");
+		envio.setPorta("8080");
 		envio.setDatahora(new Date());
 		envio.setIdentificadorDispotivo("macos");
 		ProxySegurancaDelegate.getInstancia().autenticacaoAutorizacao(envio);

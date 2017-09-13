@@ -27,8 +27,10 @@
 	<modules>
 		<module>app-seguranca-ear</module>
 		<module>app-seguranca-ejb</module>
+		<module>app-seguranca-apl</module>
+		<module>app-seguranca-usr</module>
 		<module>app-seguranca-api</module>
-    <module>app-seguranca-integracao</module>
+        <module>app-seguranca-integracao</module>
   </modules>
 
 	<properties>

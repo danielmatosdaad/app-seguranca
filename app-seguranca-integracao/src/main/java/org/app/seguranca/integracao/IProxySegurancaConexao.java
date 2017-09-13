@@ -9,8 +9,8 @@ import br.app.barramento.integracao.exception.NegocioException;
 
 public interface IProxySegurancaConexao {
 
-	public void autenticacaoAutorizacao(AutenticacaoEnvio autenticacaoEnvio)
+	public String autenticacaoAutorizacao(AutenticacaoEnvio autenticacaoEnvio)
 			throws NegocioException, InfraEstruturaException;
 
-	public RespostaDTO executar(TipoAcao acao, EnvioDTO envio, String nomeRepositorio, String nomeCatalogo) throws NegocioException, InfraEstruturaException;
+	public RespostaDTO executar(TipoAcao acao, EnvioDTO envio) throws NegocioException, InfraEstruturaException;
 }
