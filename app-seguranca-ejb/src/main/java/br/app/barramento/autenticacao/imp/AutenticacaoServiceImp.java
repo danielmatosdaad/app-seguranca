@@ -58,11 +58,13 @@ public class AutenticacaoServiceImp implements IAutenticacaoRemote, IAutenticaca
 
 		SessaoEnvioDTO envioSessao = criarEnvioSessao(autenticacaoEnvio);
 
-		SessaoRespostaDTO resposta = servico.abrir(envioSessao);
+		SessaoRespostaDTO sessaoDTO = servico.abrir(envioSessao);
 
 		AutenticacaoResposta autenticacaoResposta = new AutenticacaoResposta(
-				autenticacaoEnvio.getNomeIdentificadorAutenticacao(), new Date(), resposta);
+				autenticacaoEnvio.getNomeIdentificadorAutenticacao(), new Date(), sessaoDTO);
 
+		
+		
 		return autenticacaoResposta;
 	}
 

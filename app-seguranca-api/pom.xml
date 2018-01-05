@@ -83,7 +83,7 @@
 		<dependency>
 			<groupId>br.com.app.smart.business</groupId>
 			<artifactId>
-				app-barramento-integracao-interfaces
+				app-barramento-integracao
 			</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>

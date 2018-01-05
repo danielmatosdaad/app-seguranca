@@ -1,5 +1,11 @@
 package br.app.barramento.proxy.imp;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.security.InvalidKeyException;
+import java.security.KeyPair;
+import java.security.spec.InvalidKeySpecException;
+
 import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Remote;
@@ -20,6 +26,9 @@ import br.app.barramento.integracao.dto.RespostaDTO;
 import br.app.barramento.integracao.dto.TipoAcao;
 import br.app.barramento.integracao.exception.InfraEstruturaException;
 import br.app.barramento.integracao.exception.NegocioException;
+import br.app.crypt.algorithm.AsymmetricAlgorithm;
+import br.app.crypt.algorithm.CryptFactory;
+import br.app.crypt.algorithm.asymmetric.AsymmetricCrypter;
 import br.app.repositorio.servico.integracao.CatalogoServico;
 import br.app.repositorio.servico.integracao.IRepositorio;
 import br.app.repositorio.servico.integracao.InformacaoServico;
@@ -37,6 +46,8 @@ public class ProxySegurancaImp implements IProxySegurancaConexaoLocal, IProxySeg
 	private AutenticacaoResposta autenticacaoResposta;
 
 	private AutenticacaoHash autenticacaoHash;
+	
+	private KeyPair keys;
 
 	@Override
 	public String autenticacaoAutorizacao(AutenticacaoEnvio autenticacaoEnvio)
@@ -50,8 +61,42 @@ public class ProxySegurancaImp implements IProxySegurancaConexaoLocal, IProxySeg
 		this.autenticacaoHash = new AutenticacaoHash(autenticacaoEnvio.getNomeIdentificadorAutenticacao(),
 				autenticacaoEnvio.getIp(), autenticacaoEnvio.getPorta(), autenticacaoEnvio.getIdentificadorDispotivo());
 
+		gerarParChavesParaCriptografia();
 		return autenticacaoHash.getTokenAutenticacao();
 
+	}
+
+	private void gerarParChavesParaCriptografia() throws InfraEstruturaException {
+		try {
+			AsymmetricCrypter asymmetricCrypter =CryptFactory.asymmetric().getCryptografy(AsymmetricAlgorithm.RSA_1024bits);
+			asymmetricCrypter.generateKeys();
+			this.keys = asymmetricCrypter.getKeys();
+			
+//			EncryptSet es = rsa.encrypt("input");
+//			String encrypted = es.getContents();
+//			String encryptedKey = es.getEncryptedKey();
+			
+//
+////Obtenho a fábrica de criptografia assimétrica
+//AsymmetricCryptFactory factory = AsymmetricCryptFactory.getInstance();
+// 
+////Escolho o algoritmo RSA de 1024bits passando a chave pública obtida na criptografia
+//AsymmetricCrypter rsap = factory.getCryptografy(AsymmetricAlgorithm.RSA_1024bits,pubK);
+// 
+////Descriptografo o conteúdo criptografado, utilizando a chave criptografada criada junto ao conteudo criptografado. Pronto!
+//String decryptedAgain = rsap.decrypt(encripted, encryptedKey);
+		} catch (SecurityException | NoSuchMethodException | IllegalArgumentException | InstantiationException
+				| IllegalAccessException | InvocationTargetException e) {
+			throw new InfraEstruturaException("Erro ao criar criptografia", new RuntimeException());
+		} catch (InvalidKeyException e) {
+			throw new InfraEstruturaException("Erro ao criar criptografia", new RuntimeException());
+		} catch (InvalidKeySpecException e) {
+			throw new InfraEstruturaException("Erro ao criar criptografia", new RuntimeException());
+		} catch (ClassNotFoundException e) {
+			throw new InfraEstruturaException("Erro ao criar criptografia", new RuntimeException());
+		} catch (IOException e) {
+			throw new InfraEstruturaException("Erro ao criar criptografia", new RuntimeException());
+		}
 	}
 
 	public IConexao getConexao() throws InfraEstruturaException, NegocioException {
